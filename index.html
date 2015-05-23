@@ -1,0 +1,56 @@
+<canvas id="daniCanvas_Core_9_5_15" style="display:block;margin:0 auto;" height="502" width="502"></canvas>
+
+<script src="matrix.js"></script>
+<script src="GObject.js"></script>
+<script src="Core.js"></script>
+<script src="World.js"></script>
+
+<script>
+
+$(document).ready(function(){
+    
+    var canvas = $("#daniCanvas_Core_9_5_15");
+    var offset = canvas.offset();
+    var height = canvas.height();
+    var width  = canvas.width();
+    
+    var ctx = canvas[0].getContext("2d");
+    
+    //var BM    = new BulletManager(width,height);
+    var world = new World(width, height);
+    
+    var FPS       = 60;
+    var d         = new Date();
+    var lastFrame = d.getTime();
+    var delta     = 0;
+
+    /*$('#magicButton').click(function(){
+        world.shell.surface = 0;
+        world.enemy.die();
+    });*/
+
+    $(document).mousemove(function(m){
+        //world.shell.lookTo(m.pageX-offset.left,m.pageY-offset.top);
+    });
+
+    $("#homeGame").click(function(m){
+        //BulletManagerInstance(width,height).newBullet(m.pageX-offset.left, m.pageY-offset.top,width*0.5,height*0.5);
+    });
+
+    setInterval(function() {                //Gameloop
+        ctx.setTransform(1,0,0,1,0,0);      //Reset transformation Matrix
+
+        ctx.fillStyle = "#00002E";
+        ctx.fillRect(0,0,width,height);     //Clear screen
+
+        d         = new Date();
+        delta     = d.getTime()-lastFrame;  //Get time between frames
+        lastFrame = new Date().getTime();
+
+        //$('#gameInfo').html(delta);
+
+        world.update(delta);                //Update world
+        world.draw(ctx);                    //Draw   world
+    }, 1000/FPS);
+});
+</script>
