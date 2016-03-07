@@ -255,7 +255,6 @@ Matrix33.prototype.multThread = function(mB){
 }
 
 Matrix33.prototype.mult = function(mB){
-    return this.multThread(mB);
     var res = new Matrix33();
 
     res.m[0] = this.m[0] * mB.m[0] + this.m[1] * mB.m[3] + this.m[2] * mB.m[6];
